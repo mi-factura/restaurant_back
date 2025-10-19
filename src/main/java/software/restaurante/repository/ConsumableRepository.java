@@ -13,6 +13,7 @@ public interface ConsumableRepository extends JpaRepository<Consumable, Long> {
 
     @Query("""
         SELECT c FROM Consumable c 
+        JOIN FETCH c.category
         WHERE c.restaurant.id = :restaurantId
         AND (:categoryId IS NULL OR c.category.id = :categoryId)
         AND (:searchTerm IS NULL OR :searchTerm = '' OR 
@@ -24,5 +25,5 @@ public interface ConsumableRepository extends JpaRepository<Consumable, Long> {
         @Param("searchTerm") String searchTerm
     );
     
-    List<Consumable> findByRestaurantId(Long restaurantId);
+
 }
