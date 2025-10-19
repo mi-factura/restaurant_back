@@ -1,0 +1,48 @@
+# Application Configuration
+spring:
+  application:
+    name: restaurante
+
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/restaurant_db?currentSchema=proyecto_db
+    username: admin
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+
+  # JPA & Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: proyecto_db
+        hbm2ddl:
+          schema: proyecto_db
+
+  # Jackson Configuration
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+# Logging Configuration
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+
+# JWT Configuration
+jwt:
+  secret: miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024
+  expiration: 86400000  # 24 horas en milisegundos
