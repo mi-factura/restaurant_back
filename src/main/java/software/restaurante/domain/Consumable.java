@@ -41,8 +41,8 @@ public class Consumable {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal unitPrice;
+    @Column(name = "unit_price", nullable = false)
+    private double unitPrice;
 
     @Column(length = 3)
     private String currency = "COP";

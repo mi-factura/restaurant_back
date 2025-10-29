@@ -1,19 +1,20 @@
 package software.restaurante.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import java.math.BigDecimal;
+import lombok.*;
+import software.restaurante.utils.enums.OrderStatus;
+
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.Objects;
 
 
 @Entity
 @jakarta.persistence.Table(name = "order")
 @Getter
-@Setter
+@AllArgsConstructor
+@Builder
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,8 +43,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @Column(name = "total_amount", nullable = false, precision = 15, scale = 2)
-    private BigDecimal totalAmount;
+    @Column(name = "total_amount", nullable = false)
+    private Double totalAmount;
 
     @Column(length = 3)
     private String currency = "COP";
@@ -71,31 +72,22 @@ public class Order {
     @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updatedAt = OffsetDateTime.now(ZoneOffset.UTC);
 
-    @Column(precision = 5, scale = 2)
-    private BigDecimal iva;
+    @Column(name = "iva")
+    private Double iva;
 
-    @Column(precision = 5, scale = 2)
-    private BigDecimal inc;
+    @Column(name = "inc")
+    private Double inc;
 
     // JPA requires a no-arg constructor
     protected Order() {
     }
 
-    public Order(Integer orderNumber, Restaurant restaurant, Table table, User seller, BigDecimal totalAmount) {
+    public Order(Integer orderNumber, Restaurant restaurant, Table table, User seller, double totalAmount) {
         this.orderNumber = Objects.requireNonNull(orderNumber, "Order number cannot be null");
         this.restaurant = Objects.requireNonNull(restaurant, "Restaurant cannot be null");
         this.table = Objects.requireNonNull(table, "Table cannot be null");
         this.seller = Objects.requireNonNull(seller, "Seller cannot be null");
         this.totalAmount = Objects.requireNonNull(totalAmount, "Total amount cannot be null");
-    }
-
-    public enum OrderStatus {
-        PENDING,
-        IN_PROGRESS,
-        READY,
-        DELIVERED,
-        CANCELLED,
-        COMPLETED
     }
 
     @PrePersist

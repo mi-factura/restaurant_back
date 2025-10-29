@@ -27,7 +27,7 @@ public class ConsumableDTO {
     private Long categoryId;
     private String categoryName;
     private Long restaurantId;
-    private BigDecimal unitPrice;
+    private Double unitPrice;
     private String currency;
     private Integer stockQuantity;
     private Integer minStockLevel;

@@ -60,14 +60,30 @@ public class User {
     @OneToMany(mappedBy = "client", fetch=FetchType.LAZY)
     private Set<Order> ordersAsClient = new HashSet<>();
 
+    public static User withId(UUID id) {
+        User user = new User(id);
+        user.id = id;
+        return user;
+    }
+
     // Constructores
     public User() {
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
     }
 
+    public User(UUID id) {
+        this.id = id;
+    }
+
     @PreUpdate
     protected void onUpdate() {
+        this.updatedAt = Instant.now();
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
     }
 

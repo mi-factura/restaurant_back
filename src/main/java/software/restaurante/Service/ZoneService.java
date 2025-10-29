@@ -21,6 +21,8 @@ import software.restaurante.utils.enums.ErrorCode;
 import software.restaurante.utils.enums.RoleType;
 import software.restaurante.utils.RoleValidator;
 
+import static software.restaurante.utils.RoleValidator.validateUserRestaurant;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -34,7 +36,7 @@ public class ZoneService {
 
   public List<ZoneDTO> getZones(long restaurantId) {
 
-    validateUserRestaurant(restaurantId);
+    validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
 
     Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
 
@@ -49,7 +51,7 @@ public class ZoneService {
 
   public List<TableDTO> getTables(Long restaurantId, Long zoneId) {
 
-    validateUserRestaurant(restaurantId);
+    validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
 
     if (Objects.nonNull(zoneId)) {
       return getTablesByZoneId(restaurantId, zoneId);
@@ -71,17 +73,5 @@ public class ZoneService {
 
     return tables.stream().map(TableDTO::fromEntity).collect(Collectors.toList());
   }
-
-
-
-  private static void validateUserRestaurant(long restaurantId) {
-    boolean isValidUserRestaurant = RoleValidator.validateAnyRole(RoleType.getRoleTypes(), restaurantId);
-
-    if (!isValidUserRestaurant) {
-      throw new ForbiddenException("User dont have permission to access this resource",ErrorCode.FORBIDDEN);
-    }
-  }
-
-
 
 }

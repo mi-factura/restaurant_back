@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import software.restaurante.domain.Consumable;
 import software.restaurante.domain.ConsumableCategory;
+import software.restaurante.domain.OrderConsumable;
 
 @Repository
 public interface ConsumableRepository extends JpaRepository<Consumable, Long> {
@@ -24,6 +25,8 @@ public interface ConsumableRepository extends JpaRepository<Consumable, Long> {
         @Param("categoryId") Long categoryId,
         @Param("searchTerm") String searchTerm
     );
+
+    List<Consumable> findByIdInAndRestaurantId(List<Long> ids, Long restaurantId);
     
 
 }

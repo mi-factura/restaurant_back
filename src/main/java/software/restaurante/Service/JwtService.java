@@ -56,7 +56,7 @@ public class JwtService {
     claims.put("roles", roles);
     claims.put("restaurants", restaurants);
 
-    return buildToken(claims, user.getUsername());
+    return buildToken(claims, user.getId().toString());
   }
 
   private String buildToken(Map<String, Object> extraClaims, String subject) {
@@ -97,7 +97,6 @@ public class JwtService {
   }
 
   public String extractUserId(String token) {
-    token = getTokenFromHeaderValue(token);
     final Claims claims = extractAllClaims(token);
     return claims.get("user_id", String.class);
   }

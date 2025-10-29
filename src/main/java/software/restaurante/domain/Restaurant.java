@@ -15,6 +15,7 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Restaurant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -69,6 +70,12 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Zone> zones;
+
+    public static Restaurant withId(Long id) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.id = id;
+        return restaurant;
+    }
 
 
 // JPA requires a no-arg constructor

@@ -53,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return;
       }
 
-      String username = jwtService.extractUsername(jwtToken);
+      String username = jwtService.extractUserId(jwtToken);
       List<String> roles = jwtService.extractRoles(jwtToken);
 
       Collection<SimpleGrantedAuthority> authorities = roles.stream()

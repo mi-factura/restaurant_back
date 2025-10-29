@@ -21,6 +21,8 @@ import software.restaurante.utils.RoleValidator;
 import software.restaurante.utils.enums.ErrorCode;
 import software.restaurante.utils.enums.RoleType;
 
+import static software.restaurante.utils.RoleValidator.validateUserRestaurant;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -32,29 +34,19 @@ public class MenuService {
     private final ThreadPoolTaskExecutorBuilder threadPoolTaskExecutorBuilder;
 
     public List<ConsumableCategoryDTO> getCategoriesByRestaurant(long restaurantId, Long categoryId, String searchParam) {
-      validateUserRestaurant(restaurantId);
-      List<ConsumableCategory> categories = consumableCategoryRepository.findWithFilters(restaurantId, categoryId, searchParam);
-      return ConsumableCategoryDTO.fromEntities(categories);
+        validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
+        List<ConsumableCategory> categories = consumableCategoryRepository.findWithFilters(restaurantId, categoryId, searchParam);
+        return ConsumableCategoryDTO.fromEntities(categories);
     }
 
     public List<ConsumableDTO> getItemsByRestaurant(Long restaurantId, Long categoryId, String searchParam) {
-        validateUserRestaurant(restaurantId);
+        validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
         List<Consumable> consumbales = consumableRepository.findByRestaurantIdAndOptionalFilters(restaurantId, categoryId, searchParam);
         return ConsumableDTO.fromEntities(consumbales);
     }
 
-
-    private static void validateUserRestaurant(long restaurantId) {
-    boolean isValidUserRestaurant = RoleValidator.validateAnyRole(RoleType.getRoleTypes(), restaurantId);
-
-    if (!isValidUserRestaurant) {
-      throw new ForbiddenException("User dont have permission to access this resource",ErrorCode.FORBIDDEN);
-    }
-  }
-
-
     public ConsumableCategoryDTO getCategoryById(Long restaurantId, Long categoryId) {
-        validateUserRestaurant(restaurantId);
+        validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
         Optional<ConsumableCategory> category = consumableCategoryRepository.findById(categoryId);
         if (category.isEmpty()) {
             throw new DataNotFoundException("Item not found", ErrorCode.DATA_NOT_FOUND);
@@ -63,7 +55,7 @@ public class MenuService {
     }
 
     public ConsumableDTO getItemById(Long restaurantId, Long itemId) {
-        validateUserRestaurant(restaurantId);
+        validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
         Optional<Consumable> consumable = consumableRepository.findById(itemId);
         if (consumable.isEmpty()) {
             throw new DataNotFoundException("Zone not found", ErrorCode.DATA_NOT_FOUND);

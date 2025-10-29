@@ -14,6 +14,8 @@ public interface TableRepository extends JpaRepository<Table, Long> {
 
     List<Table> findByRestaurantId(Long restaurantId);
 
+    Table findByIdAndRestaurantId(Long restaurantId, Long tableId);
+
     List<Table> findByRestaurantIdAndZoneId(Long restaurantId, Long zoneId);
 
 }
