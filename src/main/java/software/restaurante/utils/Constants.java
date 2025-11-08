@@ -1,8 +1,10 @@
 package software.restaurante.utils;
 
+import java.math.BigDecimal;
+
 public interface Constants {
 
     interface Tax {
-        double IVA = 0.19;
+        BigDecimal IVA = BigDecimal.valueOf(0.19);
     }
 }

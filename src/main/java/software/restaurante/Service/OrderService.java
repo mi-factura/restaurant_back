@@ -19,6 +19,7 @@ import software.restaurante.utils.enums.OrderStatus;
 import software.restaurante.utils.enums.RoleType;
 import software.restaurante.utils.enums.TableStatus;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -70,7 +71,7 @@ public class OrderService {
                 .table(table)
                 .seller(User.withId(currentUserId))
                 .status(OrderStatus.PENDING)
-                .totalAmount(getTotalAmmountFromOrderConsumables(orderConsumables))
+                .totalAmount(getTotalAmountFromOrderConsumables(orderConsumables))
                 .iva(IVA)
                 .build();
 
@@ -84,8 +85,10 @@ public class OrderService {
 
     }
 
-    private Double getTotalAmmountFromOrderConsumables(List<OrderConsumable> orderConsumables) {
-        return orderConsumables.stream().mapToDouble(OrderConsumable::getTotalPrice).sum();
+    private BigDecimal getTotalAmountFromOrderConsumables(List<OrderConsumable> orderConsumables) {
+        return orderConsumables.stream()
+                .map(e -> e.getUnitPrice().multiply(BigDecimal.valueOf(e.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     private Table getAndValidateTable(CreateOrderDTO createOrderDTO) {
@@ -118,7 +121,7 @@ public class OrderService {
             orderConsumable.setUnitPrice(consumable.getUnitPrice());
             int quantity = getQuantity(createOrderDTO, consumable);
             orderConsumable.setQuantity(quantity);
-            orderConsumable.setTotalPrice(quantity * consumable.getUnitPrice());
+            orderConsumable.setTotalPrice(consumable.getUnitPrice().multiply(BigDecimal.valueOf(quantity)));
             return orderConsumable;
 
         }).collect(Collectors.toList());

@@ -2,6 +2,7 @@ package software.restaurante.dto.orders;
 
 import lombok.*;
 import software.restaurante.domain.OrderConsumable;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ public class OrderConsumableResponseDTO {
 
     private String name;
 
-    private Double unitPrice;
+    private BigDecimal unitPrice;
 
     private Integer quantity;
 

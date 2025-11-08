@@ -101,6 +101,11 @@ public class JwtService {
     return claims.get("user_id", String.class);
   }
 
+    public String extractUserIdFromRawToken(String token) {
+        final Claims claims = extractAllClaims(getTokenFromHeaderValue(token));
+        return claims.get("user_id", String.class);
+    }
+
   @SuppressWarnings("unchecked")
   public List<Map<String, Object>> extractRestaurants(String token) {
     final Claims claims = extractAllClaims(token);

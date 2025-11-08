@@ -42,7 +42,7 @@ public class Consumable {
     private Restaurant restaurant;
 
     @Column(name = "unit_price", nullable = false)
-    private double unitPrice;
+    private BigDecimal unitPrice;
 
     @Column(length = 3)
     private String currency = "COP";

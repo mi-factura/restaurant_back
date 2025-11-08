@@ -5,6 +5,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
@@ -27,10 +28,10 @@ public class OrderConsumable {
     private Consumable consumable;
 
     @Column(name = "unit_price",nullable = false)
-    private Double unitPrice;
+    private BigDecimal unitPrice;
 
     @Column(name="total_price", nullable = false)
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

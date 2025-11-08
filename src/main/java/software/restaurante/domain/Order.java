@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import software.restaurante.utils.enums.OrderStatus;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -44,7 +44,7 @@ public class Order {
     private OrderStatus status;
 
     @Column(name = "total_amount", nullable = false)
-    private Double totalAmount;
+    private BigDecimal totalAmount;
 
     @Column(length = 3)
     private String currency = "COP";
@@ -73,16 +73,16 @@ public class Order {
     private OffsetDateTime updatedAt = OffsetDateTime.now(ZoneOffset.UTC);
 
     @Column(name = "iva")
-    private Double iva;
+    private BigDecimal iva;
 
     @Column(name = "inc")
-    private Double inc;
+    private BigDecimal inc;
 
     // JPA requires a no-arg constructor
     protected Order() {
     }
 
-    public Order(Integer orderNumber, Restaurant restaurant, Table table, User seller, double totalAmount) {
+    public Order(Integer orderNumber, Restaurant restaurant, Table table, User seller, BigDecimal totalAmount) {
         this.orderNumber = Objects.requireNonNull(orderNumber, "Order number cannot be null");
         this.restaurant = Objects.requireNonNull(restaurant, "Restaurant cannot be null");
         this.table = Objects.requireNonNull(table, "Table cannot be null");

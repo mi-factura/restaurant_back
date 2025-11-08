@@ -24,7 +24,7 @@ public class UserController {
       @RequestHeader("x-tiger-token") String token
   ) {
 
-    String userid = jwtService.extractUserId(token);
+    String userid = jwtService.extractUserIdFromRawToken(token);
 
     UserDTO userDTO = usersService.getUserById(userid);
 

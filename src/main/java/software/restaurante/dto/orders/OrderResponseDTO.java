@@ -10,6 +10,7 @@ import software.restaurante.dto.TableDTO;
 import software.restaurante.dto.UserDTO;
 import software.restaurante.utils.enums.OrderStatus;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -24,9 +25,9 @@ public class OrderResponseDTO {
 
     private OrderStatus status;
 
-    private double totalAmount;
+    private BigDecimal totalAmount;
 
-    private double iva;
+    private BigDecimal iva;
 
     private List<OrderConsumableResponseDTO> orderConsumables;
 
