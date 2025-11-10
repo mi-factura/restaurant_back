@@ -1,7 +1,7 @@
 package software.restaurante.dto.orders;
 
 import lombok.Getter;
-import lombok.Setter;
+
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,15 +11,15 @@ import java.util.UUID;
 @Getter
 public class CreateOrderDTO {
 
-    //@NotNull
+    @NotNull
     private Long restaurantId;
 
-    //@NotNull
+    @NotNull
     private Long tableId;
 
     private UUID clientId;
 
-    //@NotEmpty
+    @NotEmpty
     private List<OrderConsumableDTO> orderConsumables;
 
     public List<Long> getOrderConsumablesIds() {

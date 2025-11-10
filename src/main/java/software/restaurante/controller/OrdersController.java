@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import software.restaurante.Service.OrderService;
 import software.restaurante.dto.orders.CreateOrderDTO;
+import software.restaurante.dto.orders.FinishOrderDTO;
 import software.restaurante.dto.orders.OrderResponseDTO;
 import software.restaurante.utils.enums.OrderStatus;
 
@@ -40,6 +41,15 @@ public class OrdersController {
     public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody CreateOrderDTO createOrderDTO) {
 
         OrderResponseDTO orderResponseDTO = orderService.createOrder(createOrderDTO);
+
+        return ResponseEntity.ok(orderResponseDTO);
+
+    }
+
+    @PostMapping("/orders/finish")
+    public ResponseEntity<OrderResponseDTO> finishOrder(@RequestBody FinishOrderDTO finishOrderDTO) {
+
+        OrderResponseDTO orderResponseDTO = orderService.finishOrder(finishOrderDTO);
 
         return ResponseEntity.ok(orderResponseDTO);
 

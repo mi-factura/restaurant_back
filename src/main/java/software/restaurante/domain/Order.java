@@ -2,7 +2,10 @@ package software.restaurante.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import software.restaurante.utils.enums.CancelReason;
+import software.restaurante.utils.enums.Currency;
 import software.restaurante.utils.enums.OrderStatus;
+import software.restaurante.utils.enums.PaymentMethod;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -13,6 +16,7 @@ import java.util.Objects;
 @Entity
 @jakarta.persistence.Table(name = "order")
 @Getter
+@Setter
 @AllArgsConstructor
 @Builder
 public class Order {
@@ -47,10 +51,12 @@ public class Order {
     private BigDecimal totalAmount;
 
     @Column(length = 3)
-    private String currency = "COP";
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @Column(name = "payment_method", length = 30)
-    private String paymentMethod = "cash";
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipping_address_id")
@@ -64,13 +70,14 @@ public class Order {
     private String notes;
 
     @Column(name = "canceled_reason", length = 256)
-    private String canceledReason;
+    @Enumerated(EnumType.STRING)
+    private CancelReason canceledReason;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt = OffsetDateTime.now(ZoneOffset.UTC);
+    private OffsetDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updatedAt = OffsetDateTime.now(ZoneOffset.UTC);
+    private OffsetDateTime updatedAt;
 
     @Column(name = "iva")
     private BigDecimal iva;

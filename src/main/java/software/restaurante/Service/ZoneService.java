@@ -1,7 +1,6 @@
 package software.restaurante.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -9,17 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import software.restaurante.domain.Restaurant;
 import software.restaurante.domain.Table;
-import software.restaurante.domain.Zone;
 import software.restaurante.dto.TableDTO;
 import software.restaurante.dto.ZoneDTO;
 import software.restaurante.execptions.DataNotFoundException;
-import software.restaurante.execptions.ForbiddenException;
 import software.restaurante.repository.RestaurantRepository;
 import software.restaurante.repository.TableRepository;
 import software.restaurante.repository.ZoneRepository;
 import software.restaurante.utils.enums.ErrorCode;
 import software.restaurante.utils.enums.RoleType;
-import software.restaurante.utils.RoleValidator;
 
 import static software.restaurante.utils.RoleValidator.validateUserRestaurant;
 
@@ -36,7 +32,7 @@ public class ZoneService {
 
   public List<ZoneDTO> getZones(long restaurantId) {
 
-    validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
+    validateUserRestaurant(restaurantId, RoleType.ALL_ROLE_TYPES());
 
     Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
 
@@ -51,20 +47,9 @@ public class ZoneService {
 
   public List<TableDTO> getTables(Long restaurantId, Long zoneId) {
 
-    validateUserRestaurant(restaurantId, RoleType.getRoleTypes());
+    validateUserRestaurant(restaurantId, RoleType.ALL_ROLE_TYPES());
 
-    if (Objects.nonNull(zoneId)) {
-      return getTablesByZoneId(restaurantId, zoneId);
-    }
-
-    return getTablesByRestaurantId(restaurantId);
-
-  }
-
-  private List<TableDTO> getTablesByRestaurantId(Long restaurantId) {
-    List<Table> tables = tableRepository.findByRestaurantId(restaurantId);
-
-    return tables.stream().map(TableDTO::fromEntity).collect(Collectors.toList());
+    return getTablesByZoneId(restaurantId, zoneId);
   }
 
   private List<TableDTO> getTablesByZoneId(Long restaurantId, Long zoneId) {

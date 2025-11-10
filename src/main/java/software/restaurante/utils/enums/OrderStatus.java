@@ -4,17 +4,17 @@ import java.util.List;
 
 public enum OrderStatus {
     PENDING,
-    IN_PROGRESS,
-    READY,
+    //IN_PROGRESS,
+    //READY,
     DELIVERED,
-    CANCELLED,
-    COMPLETED;
+    FINISHED,
+    CANCELLED;
 
     public static List<OrderStatus> getOpenStatuses() {
-        return List.of(PENDING, IN_PROGRESS, READY, DELIVERED);
+        return List.of(PENDING, DELIVERED);
     };
 
     public static List<OrderStatus> getClosedStatuses() {
-        return List.of(CANCELLED, COMPLETED);
+        return List.of(CANCELLED, FINISHED);
     };
 }

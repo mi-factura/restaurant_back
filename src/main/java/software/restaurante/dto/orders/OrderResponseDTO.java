@@ -1,5 +1,6 @@
 package software.restaurante.dto.orders;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderResponseDTO {
+
+    private Long id;
 
     private TableDTO table;
 
@@ -29,24 +33,30 @@ public class OrderResponseDTO {
 
     private BigDecimal iva;
 
+    private BigDecimal inc;
+
     private List<OrderConsumableResponseDTO> orderConsumables;
 
     public static OrderResponseDTO fromEntity(Order order) {
         return OrderResponseDTO.builder()
+                .id(order.getId())
                 .table(TableDTO.builder()
                         .id(order.getTable().getId())
                         .name(order.getTable().getName())
                         .zoneId(order.getTable().getZone().getId())
+                        .capacity(order.getTable().getCapacity())
                         .build())
                 .seller(UserDTO.createBasicInfo(order.getSeller()))
                 .status(order.getStatus())
                 .totalAmount(order.getTotalAmount())
                 .iva(order.getIva())
+                .inc(order.getInc())
                 .build();
     }
 
     public static OrderResponseDTO fromEntity(Order order, List<OrderConsumable> orderConsumables) {
         return OrderResponseDTO.builder()
+                .id(order.getId())
                 .table(TableDTO.builder()
                         .id(order.getTable().getId())
                         .name(order.getTable().getName())
@@ -55,7 +65,7 @@ public class OrderResponseDTO {
                 .seller(UserDTO.createBasicInfo(order.getSeller()))
                 .status(order.getStatus())
                 .totalAmount(order.getTotalAmount())
-                .iva(order.getIva())
+                .inc(order.getInc())
                 .orderConsumables(orderConsumables.stream().map(
                         OrderConsumableResponseDTO::fromEntity
                 ).toList())

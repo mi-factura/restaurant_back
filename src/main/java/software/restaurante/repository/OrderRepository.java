@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("""
-        SELECT o FROM Order o 
+        SELECT o FROM Order o
         JOIN FETCH o.table
         WHERE o.restaurant.id = :restaurantId
         AND (:sellerId IS NULL OR o.seller.id = :sellerId)
@@ -24,6 +24,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             @Param("statuses") List<OrderStatus> statuses
     );
 
-    List<Order> findByRestaurantId(Long restaurantId);
+    Order findByIdAndRestaurantId(Long id, Long restaurantId);
 
 }
