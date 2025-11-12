@@ -1,0 +1,31 @@
+# Application Configuration
+spring:
+  application:
+    name: restaurante
+
+  # Database Configuration
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
+      show-sql: true
+
+  # Jackson Configuration
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+# Logging Configuration
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+
+# JWT Configuration
+jwt:
+  secret: miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024miClaveSecretaSuperSeguraParaJWT2024
+  expiration: 86400000  # 24 horas en milisegundos
