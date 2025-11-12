@@ -1,4 +1,4 @@
-package software.restaurante.Service;
+package software.restaurante.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

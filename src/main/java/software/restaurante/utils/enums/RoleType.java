@@ -15,4 +15,8 @@ public enum RoleType {
   public static List<RoleType> ADMIN_OWNER_CASHIER_ROLE_TYPES() {
       return List.of(RoleType.ADMIN, RoleType.OWNER, RoleType.CASHIER);
   }
+
+  public static List<RoleType> ADMIN_OWNER_ROLE_TYPES() {
+      return List.of(RoleType.ADMIN, RoleType.OWNER);
+  }
 }

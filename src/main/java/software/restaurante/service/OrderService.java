@@ -1,4 +1,4 @@
-package software.restaurante.Service;
+package software.restaurante.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

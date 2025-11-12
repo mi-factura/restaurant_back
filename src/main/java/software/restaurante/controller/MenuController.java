@@ -4,8 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import software.restaurante.Service.MenuService;
-import software.restaurante.domain.Consumable;
+import software.restaurante.service.MenuService;
 import software.restaurante.dto.ConsumableCategoryDTO;
 import software.restaurante.dto.ConsumableDTO;
 

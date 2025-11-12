@@ -3,7 +3,7 @@ package software.restaurante.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import software.restaurante.Service.OrderService;
+import software.restaurante.service.OrderService;
 import software.restaurante.dto.orders.CreateOrderDTO;
 import software.restaurante.dto.orders.FinishOrderDTO;
 import software.restaurante.dto.orders.OrderResponseDTO;
@@ -24,15 +24,6 @@ public class OrdersController {
             @RequestParam Long restaurantId,
             @RequestParam(required = false) UUID userId) {
         List<OrderResponseDTO> orderResponseDTOs = orderService.getOpenOrdersByRestaurant(restaurantId, userId, OrderStatus.getOpenStatuses());
-
-        return ResponseEntity.ok(orderResponseDTOs);
-    }
-
-    @GetMapping("/closed/orders")
-    public ResponseEntity<List<OrderResponseDTO>> getClosedOrders(
-            @RequestParam Long restaurantId,
-            @RequestParam(required = false) UUID userId) {
-        List<OrderResponseDTO> orderResponseDTOs = orderService.getOpenOrdersByRestaurant(restaurantId, userId, OrderStatus.getClosedStatuses());
 
         return ResponseEntity.ok(orderResponseDTOs);
     }

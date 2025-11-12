@@ -36,6 +36,7 @@ public class OrderConsumable {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt = OffsetDateTime.now(ZoneOffset.UTC);
 
     @PrePersist

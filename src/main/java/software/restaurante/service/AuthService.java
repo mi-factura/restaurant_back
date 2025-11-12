@@ -1,4 +1,4 @@
-package software.restaurante.Service;
+package software.restaurante.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

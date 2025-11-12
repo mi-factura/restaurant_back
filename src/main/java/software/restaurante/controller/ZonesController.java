@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import software.restaurante.Service.ZoneService;
+import software.restaurante.service.ZoneService;
 import software.restaurante.dto.TableDTO;
 import software.restaurante.dto.ZoneDTO;
 

@@ -12,6 +12,7 @@ import software.restaurante.dto.UserDTO;
 import software.restaurante.utils.enums.OrderStatus;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Getter
@@ -35,6 +36,8 @@ public class OrderResponseDTO {
 
     private BigDecimal inc;
 
+    private OffsetDateTime createdAt;
+
     private List<OrderConsumableResponseDTO> orderConsumables;
 
     public static OrderResponseDTO fromEntity(Order order) {
@@ -51,6 +54,7 @@ public class OrderResponseDTO {
                 .totalAmount(order.getTotalAmount())
                 .iva(order.getIva())
                 .inc(order.getInc())
+                .createdAt(order.getCreatedAt())
                 .build();
     }
 

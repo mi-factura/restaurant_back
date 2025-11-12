@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import software.restaurante.Service.JwtService;
-import software.restaurante.Service.UsersService;
+import software.restaurante.service.JwtService;
+import software.restaurante.service.UsersService;
 import software.restaurante.dto.UserDTO;
 
 @RestController()

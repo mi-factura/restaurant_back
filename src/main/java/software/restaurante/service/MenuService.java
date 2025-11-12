@@ -1,4 +1,4 @@
-package software.restaurante.Service;
+package software.restaurante.service;
 
 import java.util.List;
 import java.util.Optional;
