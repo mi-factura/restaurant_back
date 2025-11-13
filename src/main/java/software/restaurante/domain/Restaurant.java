@@ -63,6 +63,7 @@ public class Restaurant {
     @Column(name = "dian_billing_prefix", length = 10)
     private String dianBillingPrefix;
 
+    @Column(name = "dian_email", nullable = false, length = 100)
     private String dianEmail;
 
     @Column(name = "order_day_counter", nullable = false)
