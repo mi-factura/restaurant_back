@@ -2,7 +2,6 @@ package software.restaurante.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -10,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import software.restaurante.execptions.UnAuthorizedException;
+
+import static software.restaurante.utils.enums.ErrorCode.UNAUTHORIZED;
 
 @Component
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class CustomAuthenticatorProvider  implements AuthenticationProvider {
       );
     }
 
-    throw new BadCredentialsException("Invalid username or password");
+    throw new UnAuthorizedException("Invalid username or password", UNAUTHORIZED);
   }
 
   @Override
