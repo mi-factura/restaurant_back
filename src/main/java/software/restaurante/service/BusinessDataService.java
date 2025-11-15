@@ -28,7 +28,8 @@ public class BusinessDataService {
 
     public List<OrderResponseDTO> getOrdersStats(Long restaurantId, LocalDate startDate, LocalDate endDate, int page, int size) {
 
-        RoleValidator.validateUserRestaurant(restaurantId, RoleType.ADMIN_OWNER_ROLE_TYPES());
+        //TODO Remover comment
+        //RoleValidator.validateUserRestaurant(restaurantId, RoleType.ADMIN_OWNER_ROLE_TYPES());
 
         OffsetDateTime start = startDate.atStartOfDay(ZoneId.of("America/Bogota")).toOffsetDateTime();
         OffsetDateTime end = endDate.atStartOfDay(ZoneId.of("America/Bogota")).toOffsetDateTime();
