@@ -789,7 +789,7 @@ INSERT INTO "order" (order_number, restaurant_id, table_id, seller_id, status, t
  (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino'),
  (SELECT id FROM "table" WHERE name = 'Mesa 2' AND zone_id = (SELECT id FROM zone WHERE name = 'Planta 1' AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')) AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
  (SELECT id FROM "user" WHERE username = 'greyler_waiter'),
- 'PENDING', 95000.00, NULL, 0.08, 'COP'),
+ 'PENDING', 96000.00    , NULL, 0.08, 'COP'),
 (2,
  (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino'),
  (SELECT id FROM "table" WHERE name = 'Mesa 5' AND zone_id = (SELECT id FROM zone WHERE name = 'Planta 2' AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')) AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
@@ -799,13 +799,65 @@ INSERT INTO "order" (order_number, restaurant_id, table_id, seller_id, status, t
  (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino'),
  (SELECT id FROM "table" WHERE name = 'Mesa 4' AND zone_id = (SELECT id FROM zone WHERE name = 'Planta 3' AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')) AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
  (SELECT id FROM "user" WHERE username = 'greyler_waiter'),
- 'PENDING', 156000.00, NULL, 0.08, 'COP'),
+ 'PENDING', 176000.00, NULL, 0.08, 'COP'),
 (4,
  (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino'),
  (SELECT id FROM "table" WHERE name = 'Mesa 7' AND zone_id = (SELECT id FROM zone WHERE name = 'Planta 4' AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')) AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
  (SELECT id FROM "user" WHERE username = 'greyler_waiter'),
  'PENDING', 72000.00, NULL, 0.08, 'COP');
- 
+
+
+
+    INSERT INTO order_consumable (order_id, consumable_id, quantity, unit_price, total_price) VALUES
+((SELECT id FROM "order" WHERE order_number = 1 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-ENT-001'), 2, 28000.00, 56000.00),
+
+((SELECT id FROM "order" WHERE order_number = 1 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-BEB-001'), 2, 8000.00, 16000.00),
+
+((SELECT id FROM "order" WHERE order_number = 1 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-ENT-003'), 1, 18000.00, 18000.00),
+
+((SELECT id FROM "order" WHERE order_number = 1 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-BEB-005'), 2, 3000.00, 6000.00);
+
+
+
+
+INSERT INTO order_consumable (order_id, consumable_id, quantity, unit_price, total_price) VALUES
+((SELECT id FROM "order" WHERE order_number = 2 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-MAR-002'), 2, 52000.00, 104000.00),
+
+((SELECT id FROM "order" WHERE order_number = 2 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-BEB-002'), 2, 9000.00, 18000.00),
+
+((SELECT id FROM "order" WHERE order_number = 2 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-BEB-005'), 2, 3000.00, 6000.00);
+
+
+
+
+INSERT INTO order_consumable (order_id, consumable_id, quantity, unit_price, total_price) VALUES
+((SELECT id FROM "order" WHERE order_number = 3 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-MAR-003'), 2, 58000.00, 116000.00),
+
+((SELECT id FROM "order" WHERE order_number = 3 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-PES-001'), 1, 48000.00, 48000.00),
+
+((SELECT id FROM "order" WHERE order_number = 3 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-BEB-004'), 2, 6000.00, 12000.00);
+
+
+INSERT INTO order_consumable (order_id, consumable_id, quantity, unit_price, total_price) VALUES
+    ((SELECT id FROM "order" WHERE order_number = 4 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-MAR-001'), 1, 45000.00, 45000.00),
+
+((SELECT id FROM "order" WHERE order_number = 4 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+(SELECT id FROM consumable WHERE sku = 'PM-ENT-002'), 1, 15000.00, 15000.00),
+
+((SELECT id FROM "order" WHERE order_number = 4 AND restaurant_id = (SELECT id FROM restaurant WHERE comercial_name = 'Puerto Marino')),
+    (SELECT id FROM consumable WHERE sku = 'PM-POS-001'), 1, 12000.00, 12000.00);
+
 
 -- Actualizar mesas ocupadas con current_order_id y occupied_since
 UPDATE "table" SET 

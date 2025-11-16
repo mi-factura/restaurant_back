@@ -45,7 +45,7 @@ public class OrderService {
 
         List<Order> orders = orderRepository.findByRestaurantIdAndOptionalFilterSellerId(restaurantId, userId, statuses);
 
-        return orders.stream().map(OrderResponseDTO::fromEntity).collect(Collectors.toList());
+        return orders.stream().map(e -> OrderResponseDTO.fromEntity(e, e.getOrderConsumables())).collect(Collectors.toList());
     }
 
     @Transactional

@@ -15,18 +15,19 @@ import java.util.UUID;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query("""
-        SELECT o FROM Order o
-        JOIN FETCH o.table
-        WHERE o.restaurant.id = :restaurantId
-        AND (:sellerId IS NULL OR o.seller.id = :sellerId)
-        AND (:statuses IS NULL OR o.status IN (:statuses))
-    """)
-    List<Order> findByRestaurantIdAndOptionalFilterSellerId(
-            @Param("restaurantId") Long restaurantId,
-            @Param("sellerId") UUID sellerId,
-            @Param("statuses") List<OrderStatus> statuses
-    );
+        @Query("""
+            SELECT DISTINCT o FROM Order o
+            JOIN FETCH o.table
+            LEFT JOIN FETCH o.orderConsumables
+            WHERE o.restaurant.id = :restaurantId
+            AND (:sellerId IS NULL OR o.seller.id = :sellerId)
+            AND (:statuses IS NULL OR o.status IN (:statuses))
+        """)
+        List<Order> findByRestaurantIdAndOptionalFilterSellerId(
+                @Param("restaurantId") Long restaurantId,
+                @Param("sellerId") UUID sellerId,
+                @Param("statuses") List<OrderStatus> statuses
+        );
 
     @Query("""
     

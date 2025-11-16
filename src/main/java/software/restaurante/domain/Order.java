@@ -10,6 +10,7 @@ import software.restaurante.utils.enums.PaymentMethod;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -49,6 +50,9 @@ public class Order {
 
     @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    List<OrderConsumable> orderConsumables;
 
     @Column(length = 3)
     @Enumerated(EnumType.STRING)
