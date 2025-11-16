@@ -43,7 +43,7 @@ public class Table {
     @JoinColumn(name = "responsable_id")
     private User responsable;
 
-    @Column(name = "occupied_since", updatable = false)
+    @Column(name = "occupied_since")
     private OffsetDateTime occupiedSince;
 
     @Column(name = "created_at", nullable = false, updatable = false)
