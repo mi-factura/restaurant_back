@@ -35,7 +35,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         JOIN FETCH o.seller
         WHERE o.restaurant.id = :restaurantId
         AND o.createdAt BETWEEN :startDate AND :endDate
-        order by o.createdAt ASC
+        order by o.createdAt DESC
     """)
     List<Order> findByRestaurantIdAndDateCreatedRange(
             Long restaurantId,
