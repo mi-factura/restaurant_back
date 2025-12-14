@@ -14,7 +14,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:25-jre
 
 # Crear un usuario no root para ejecutar la aplicación
-RUN groupadd -r spring && useradd -r -g spring spring
+#RUN groupadd -r spring && useradd -r -g spring spring
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -23,10 +23,10 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Cambiar ownership
-RUN chown -R spring:spring /app
+#RUN chown -R spring:spring /app
 
 # Cambiar a usuario no root
-USER spring
+#USER spring
 
 # Exponer el puerto
 EXPOSE 8080
