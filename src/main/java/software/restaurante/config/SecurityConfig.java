@@ -52,7 +52,11 @@ public class SecurityConfig {
         // si usas cookies / credentials:
         config.setAllowCredentials(true);
         // origen exacto del frontend (mejor que "*")
-        config.setAllowedOrigins(List.of("http://localhost:80", "https://localhost:80", "http://192.168.0.111:80", "https://192.168.0.111:80"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost",
+                "https://localhost",
+                "http://192.168.0.111",
+                "https://192.168.0.111"));
         // o, si necesitas patrones (Spring 5.3+):
         // config.setAllowedOriginPatterns(List.of("http://localhost:5173"));
         config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
