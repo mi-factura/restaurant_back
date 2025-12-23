@@ -31,7 +31,7 @@ public class SecurityConfig {
       http
             .csrf(AbstractHttpConfigurer::disable)
             .cors(Customizer.withDefaults())
-            .authorizeHttpRequests(auth -> auth.requestMatchers("v1/api/auth/login").permitAll().anyRequest().authenticated())
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/v1/api/auth/login").permitAll().anyRequest().authenticated())
               .sessionManagement(session ->
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authenticationProvider(authenticatorProvider)
@@ -56,7 +56,9 @@ public class SecurityConfig {
                 "http://localhost",
                 "https://localhost",
                 "http://192.168.0.111",
-                "https://192.168.0.111"));
+                "https://192.168.0.111",
+                "https://192.168.0.102",    // IP correcta
+                "https://restaurant.lan"));
         // o, si necesitas patrones (Spring 5.3+):
         // config.setAllowedOriginPatterns(List.of("http://localhost:5173"));
         config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
